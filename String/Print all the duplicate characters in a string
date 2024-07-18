@@ -1,0 +1,51 @@
+//  HASHING
+void printDups(string str)
+{
+    unordered_map<char, int> count;
+    for (int i = 0; i < str.length(); i++) {
+        // increase the count of character str[i] by 1
+        count[str[i]]++;
+    }
+    // iterating through the unordered map
+    for (auto it : count) {
+        // if the count of characters is greater than 1 then
+        // duplicate found
+        if (it.second > 1)
+            cout << it.first << ", count = " << it.second
+                 << "\n";
+    }
+}
+Time Complexity: O(N), where N = length of the string passed and it takes O(1) time to insert and access any element in an unordered map
+Auxiliary Space: O(K), where K = size of the map (0<=K<=input_string_length), in worst case space will be O(N).
+
+
+-------------------------OR------------------------
+
+
+//  SORTING STRING
+void printDuplicates(string str)
+{
+    int len = str.length();
+
+    // Sorting the string
+    sort(str.begin(), str.end());
+
+    // Loop through the sorted string to find duplicates
+    for (int i = 0; i < len; i++) {
+        int count = 1;
+
+        // Counting the occurrences of each character
+        while (i < len - 1 && str[i] == str[i + 1]) {
+            count++;
+            i++;
+        }
+
+        // Printing the duplicate character and its count
+        if (count > 1) {
+            cout << str[i] << ", count = " << count << endl;
+        }
+    }
+}
+Time Complexity: O(N*logN), where n is the length of the string 
+Auxiliary Space: O(1), if you observe we did not use any extra space.
+
