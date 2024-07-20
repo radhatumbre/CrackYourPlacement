@@ -1,0 +1,43 @@
+class Solution {
+public:
+    bool validPalindrome(string s) {
+        int left=0,right = s.length()-1;
+        int count = 0;
+        while(left<=right){
+            if(s[left]==s[right]){
+                left++;
+                right--;
+            }
+            else{
+                if(left+1 ==right){
+                    count+1;
+                    break;
+                }
+                if(s[left+1]==s[right] && s[left]==s[right-1]){
+                    bool leftdelete = validPalindrome(s.substr(left+1, right-left));
+                    bool rightdelete = validPalindrome(s.substr(left, right-left));
+                    if(leftdelete){
+                        count++;
+                        left++;
+                    }
+                    else if(rightdelete){
+                        count++;
+                        right--;
+                    }
+                }
+                else if(s[left]==s[right-1]){
+                    count++;
+                    right--;
+                }
+                else if(s[left+1]==s[right]){
+                    count++;
+                    left++;
+                }
+                else    return false;
+            }
+            if(count>1) return false;
+        }
+        if(count>1) return false;
+        return true;
+    }
+};
