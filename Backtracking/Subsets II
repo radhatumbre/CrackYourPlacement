@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> ans;
+        sort(nums.begin(), nums.end());
+        for(int i=0; i<(1<<nums.size()); i++){
+            vector<int> subans;
+            for(int j=0; j<nums.size(); j++){
+                if(i & (1<<j) )
+                    subans.push_back(nums[j]);
+            }
+            // not present;
+            if( !count(ans.begin(), ans.end(), subans) )
+                ans.push_back(subans);
+        }
+        return ans;
+    }
+};
