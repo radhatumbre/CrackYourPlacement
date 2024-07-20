@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int search(vector<int>& arr, int target) {
+        int low =0;
+        int high = arr.size()-1;
+        while(low<=high){
+            cout<<arr[low]<<" - "<<arr[high]<<endl;
+            int mid = (low+high)/2;
+
+            if(arr[mid]==target){
+                return mid;
+            }
+            
+            // right sorted
+            if(arr[mid]<=arr[high]){
+                if(arr[mid]<target && target<=arr[high]){
+                    low = mid+1;
+                }
+                else{
+                    high = high-1;
+                }
+            }
+
+            // left sorted
+            if(arr[low]<=arr[mid]){
+                if(arr[low]<=target && target<arr[mid])
+                    high = high-1;
+                else
+                    low = mid+1;;
+
+            }
+            
+
+        }
+        return -1;
+    }
+};
