@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void solve(int n,int i, string str, int open, int close, vector<string> &ans){
+        if(i==n*2){
+            ans.push_back(str);
+            return;
+        }
+
+        if(open<n){
+            str[i] =  '(';
+            solve(n,i+1,str,open+1, close, ans);
+        }
+
+        if(open>close){
+            str[i] = ')';
+            solve(n,i+1,str,open,close+1, ans);
+        }
+
+    }
+    vector<string> generateParenthesis(int n) {
+        vector<string> ans;
+        string str(n*2,'(');
+        solve(n,0,str,0,0,ans);
+        return ans;
+
+    }
+};
